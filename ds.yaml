@@ -1,0 +1,23 @@
+apiVersion: apps/v1
+kind: DaemonSet
+metadata:
+  name: log-agent
+spec:
+  selector:
+    matchLabels:
+      app: log-agent
+  template:
+    metadata:
+      labels:
+        app: log-agent
+    spec:
+      # nodeSelector:
+      #   region: us-east-1   # Only runs on nodes with this label
+      containers:
+      - name: log-agent
+        image: my-logger:latest
+
+#selector.matchLabels
+#This tells Kubernetes which Pods belong to the DaemonSet.
+#template.metadata.labels
+#These labels are applied to the Pods that the DaemonSet creates.
