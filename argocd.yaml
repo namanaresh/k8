@@ -1,0 +1,18 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: demo-apps
+  namespace: argocd
+spec:
+  project: default
+  source:
+    repoURL: https://github.com/namanaresh/k8/blob/main/test.yaml
+    targetRevision: HEAD
+    path: manifests   # folder in your repo with YAMLs
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: test   # namespace in kind where you want them deployed
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
